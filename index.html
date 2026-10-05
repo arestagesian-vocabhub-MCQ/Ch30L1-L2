@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farsi Vocabulary Challenge - Chapter 30_Lesson 1 & 2</title>
+<style>
+  body {
+    font-family: "Times New Roman", serif;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 10px;
+  }
+  h1, h2, #vocab-word, #context-section {
+    text-align: center;
+  }
+  h1 {
+    font-weight: bold;
+    font-size: 1.9rem;
+    margin-bottom: 0;
+  }
+  h2 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  #vocab-word {
+    font-size: 1.65rem; /* slightly smaller than before but larger than before-reduced */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  .answer-box {
+    color: white;
+    font-family: "Times New Roman", serif;
+    font-size: 1.4rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .answer-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.35);
+  }
+  .answer-box:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.25) inset;
+  }
+  .color-blue { background-color: #2196f3; }
+  .color-orange { background-color: #ff9800; }
+  .color-purple { background-color: #9c27b0; }
+  .answer-box .feedback { margin-left: 15px; font-size: 1.5rem; }
+  #context-section {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  #reveal-btn {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 7px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  #reveal-btn.active {
+    background-color: #4caf50;
+    box-shadow: 0 0 15px #4caf50;
+  }
+  #reveal-indicator {
+    display: none;
+    text-align: center; /* center both arrow and text */
+    animation: bounce 1s infinite;
+    margin-top: 5px;
+  }
+  #reveal-arrow {
+    display: block;
+    font-size: 1.5rem;  /* bigger arrow */
+    margin-bottom: 2px;
+  }
+  #reveal-text {
+    display: block;
+    font-size: 1.2rem;
+    color: brown;       /* font color brown */
+    font-weight: bold;  /* bold text */
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  #farsi-context {
+    filter: blur(6px);
+    font-size: 1.4rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    user-select: none;
+    min-height: 55px;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  #farsi-context.context-clear { filter: none; user-select: text; }
+  #english-context {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+    min-height: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+  }
+  audio { width: 100%; margin-top: 10px; outline: none; }
+  #navigation { display: flex; justify-content: space-between; align-items: center; }
+  button {
+    font-family: "Times New Roman", serif;
+    font-size: 1rem;
+    padding: 10px 18px;
+    cursor: pointer;
+    background-color: #2196f3;
+    border: none;
+    border-radius: 6px;
+    color: white;
+  }
+  button:disabled { background-color: #90caf9; cursor: not-allowed; }
+  #progress-text { font-size: 1rem; }
+  @media (max-width: 480px) {
+    body { margin: 10px; }
+    .answer-box { font-size: 1rem; padding: 8px 15px; }
+  }
+  #audio-mc-section {
+    display: none;
+    text-align: center;
+    margin-top: 25px;
+  }
+  #audio-mc-section p {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  #audio-mc-section .answer-box {
+    font-size: 1.3rem;
+    margin: 12px auto;
+    max-width: 650px;
+    padding: 10px 20px;
+    border: none;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+  }
+  #audio-mc-section .answer-box .feedback {
+    font-size: 1.6rem;
+    margin-left: 15px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Farsi Vocabulary Challenge</h1>
+<h2>Chapter 30_Lesson 1 & 2</h2>
+
+<div id="vocab-word">Loading...</div>
+<div id="answers"></div>
+
+<div id="context-section">
+  <button id="reveal-btn">Reveal Context</button>
+  <div id="reveal-indicator">
+    <span id="reveal-arrow">⬆️</span>
+    <span id="reveal-text">Now you can click Reveal Context! 🎉</span>
+  </div>
+  <div id="farsi-context">...</div>
+  <div id="english-context"></div>
+  <audio id="audio-player" controls preload="none">
+    <source src="" type="audio/wav" />
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<div id="audio-mc-section"></div>
+
+<div id="navigation">
+  <button id="back-btn">Back</button>
+  <div id="progress-text"></div>
+  <button id="next-btn">Next</button>
+</div>
+
+<script>
+const vocabData = [
+  {
+  "word": "اِختِلاس",
+  "correct": "embezzlement",
+  "distractors": ["bribery", "fraud"],
+  "farsiContext": "پرونده‌های متعدد اختلاس در شرکت‌های دولتی، اعتماد عمومی به مدیریت درآمدهای نفتی را به‌شدت کاهش داده است",
+  "englishContext": "Multiple embezzlement cases in state-owned companies have severely undermined public trust in the management of oil revenues",
+  "audio": "01.wav",
+  "multipleChoice": [
+    {
+      "question": "What was the main consequence of multiple embezzlement cases in state-owned companies?",
+      "options": [
+        { "answer": "Increased attention to financial oversight in state-owned companies", "correct": false },
+        { "answer": "More discussion about oil revenue policies among the public", "correct": false },
+        { "answer": "A decline in public trust toward oil revenue management", "correct": true }
+      ]
+    }
+  ]
+},
+{
+  "word": "اِنتِها",
+  "correct": "end",
+  "distractors": ["beginning", "middle"],
+  "farsiContext": "در انتهای دهه‌ی هشتاد، دولت ایران به دلیل کاهش چشمگیر صادرات فرآورده‌های نفتی و درآمدهای ناشی از آن، مجبور شد اصلاحات یارانه‌ای را آغاز کند",
+  "englishContext": "At the end of the 80s, the Iranian government, due to a significant decline in oil product exports and the revenues derived from them, was forced to initiate subsidy reforms",
+  "audio": "02.wav",
+  "multipleChoice": [
+    {
+      "question": "What prompted the Iranian government at the end of the 80s to start subsidy reforms?",
+      "options": [
+        { "answer": "A sharp drop in oil exports and related revenues", "correct": true },
+        { "answer": "A steady increase in oil revenues during the decade", "correct": false },
+        { "answer": "International pressure to modernize the subsidy system", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "تَحلیلگَر",
+  "correct": "analyst",
+  "distractors": ["economist", "advisor"],
+  "farsiContext": "بسیاری از تحلیلگران اقتصادی معتقدند که وابستگی بیش از حد به درآمدهای نفتی، مانع توسعه‌ی پایدار در ایران شده است",
+  "englishContext": "Many economic analysts believe that excessive dependence on oil revenues has hindered sustainable development in Iran.",
+  "audio": "03.wav",
+  "multipleChoice": [
+    {
+      "question": "Which of the following statements is true?",
+      "options": [
+        { "answer": "Sustainable development was achieved through oil revenues", "correct": false },
+        { "answer": "Excessive reliance on oil revenues has hindered sustainable development", "correct": true },
+        { "answer": "Oil revenues were sufficient for long-term development", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "تَصریح کردن",
+  "correct": "to clarify, to emphasize",
+  "distractors": ["to expedite", "to announce"],
+  "farsiContext": "رئیس‌جمهور در سخنرانی خود تصریح کرد که ادامه‌ی پرداخت یارانه‌های غیرهدفمند برای اقتصاد کشور امکان‌پذیر نیست",
+  "englishContext": "Which of the following statements is true according to the president's speech?",
+  "audio": "04.wav",
+  "multipleChoice": [
+    {
+      "question": "What did the president clarify in his speech?",
+      "options": [
+        { "answer": "The government will maintain all subsidies at current levels", "correct": false },
+        { "answer": "Subsidies will be increased uniformly for every citizen", "correct": false },
+        { "answer": "Continuing non-targeted subsidies is not economically feasible", "correct": true }
+      ]
+    }
+  ]
+},
+{
+  "word": "تَعَلُّق گِرِفتَن به (گیر)",
+  "correct": "to be allotted to",
+  "distractors": ["to be promoted", "to be interested in"],
+  "farsiContext": "بخش بزرگی از درآمدهای نفتی در ایران به‌جای سرمایه‌گذاری، به پرداخت یارانه‌های نقدی تعلق گرفته است",
+  "englishContext": "A large portion of Iran's oil revenues has been allocated to cash subsidies instead of investment",
+  "audio": "05.wav",
+  "multipleChoice": [
+    {
+      "question": "What has a large portion of Iran’s oil revenues been allotted to?",
+      "options": [
+        { "answer": "Cash subsidies instead of investment", "correct": true },
+        { "answer": "Toward industrial investment and job creation", "correct": false },
+        { "answer": "Infrastructure and public service projects", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "حاکِمیتی",
+  "correct": "governmental",
+  "distractors": ["political", "administrative"],
+  "farsiContext": "تصمیم‌گیری درباره‌ی اصلاح قیمت انرژی، یک مسأله‌ی کاملاً حاکمیتی به شمار می‌رود و دولت دستورات لازم برای کنترل قیمت‌ها را صادر می‌کند",
+  "englishContext": "Decision-making regarding energy price reforms is considered a fully governmental matter, and the government issues the necessary directives to control prices",
+  "audio": "06.wav",
+  "multipleChoice": [
+    {
+      "question": "Decision-making about energy price reforms is viewed as:",
+      "options": [
+        { "answer": "A political matter debated among policymakers", "correct": false },
+        { "answer": "A governmental issue directed by state authority", "correct": true },
+        { "answer": "An administrative task handled by local offices", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "حامِلِ اِنِرژی",
+  "correct": "energy carrier",
+  "distractors": ["energy source", "power generator"],
+  "farsiContext": "ایران با داشتن ذخایر عظیم گازی و نفتی یکی از بزرگ‌ترین دارندگان حامل‌های انرژی در جهان به شمار می‌رود",
+  "englishContext": "With its vast gas and oil reserves, Iran is considered one of the largest holders of energy carriers in the world",
+  "audio": "07.wav",
+  "multipleChoice": [
+    {
+      "question": "According to the statement, what makes Iran one of the leading countries in the world?",
+      "options": [
+        { "answer": "Its vast reserves of oil and natural gas", "correct": true },
+        { "answer": "Its advanced solar and wind energy infrastructure", "correct": false },
+        { "answer": "Its large network of hydroelectric power plants", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "خُصوصی‌سازی",
+  "correct": "privatization",
+  "distractors": ["nationalization", "liberalization"],
+  "farsiContext": "برنامه‌های خصوصی‌سازی در ایران اغلب به دلیل وابستگی بیش از حد اقتصاد به درآمدهای نفتی با شکست مواجه شده‌اند",
+  "englishContext": "Privatization programs in Iran have often failed due to the economy's excessive dependence on oil revenues",
+  "audio": "08.wav",
+  "multipleChoice": [
+    {
+      "question": "According to the passage, Iran’s privatization efforts have failed mainly because of:",
+      "options": [
+        { "answer": "The rapid liberalization of financial institutions", "correct": false },
+        { "answer": "The government’s reduced role in the oil industry", "correct": false },
+        { "answer": "The economy’s excessive reliance on oil revenues", "correct": true }
+      ]
+    }
+  ]
+},
+{
+  "word": "دَبیر",
+  "correct": "secretary, clerk",
+  "distractors": ["advisor", "minister"],
+  "farsiContext": "دبیر شورای پول و اعتبار اعلام کرد که سیاست‌های جدید مالی به‌زودی اجرا خواهد شد تا تورم کنترل شود و سرمایه‌گذاری در بخش‌های تولیدی افزایش یابد",
+  "englishContext": "The Secretary of the Money and Credit Council announced that new financial policies will soon be implemented to control inflation and increase investment in the production sectors",
+  "audio": "09.wav",
+  "multipleChoice": [
+    {
+      "question": "The Secretary of the Money and Credit Council stated that new policies aim to:",
+      "options": [
+        { "answer": "Control inflation and enhance investment in production", "correct": true },
+        { "answer": "Stabilize inflation and strengthen foreign trade", "correct": false },
+        { "answer": "Reduce spending and support the financial sector", "correct": false }
+      ]
+    }
+  ]
+},
+{
+  "word": "دُور زَدَن",
+  "correct": "to circumvent",
+  "distractors": ["to violate", "to avoid"],
+  "farsiContext": "برخی شرکت‌ها برای دور زدن تحریم‌های نفتی، شرکت‌های خود را به کشورهای حاشیه خلیج فارس منتقل کرده و از طریق واسطه‌ها به فعالیت‌های اقتصادی خود ادامه می‌دهند",
+  "englishContext": "Some companies, in order to circumvent oil sanctions, have relocated their firms to countries on the Persian Gulf rim and continue their economic activities through intermediaries",
+  "audio": "10.wav",
+  "multipleChoice": [
+    {
+      "question": "Some companies circumvent oil sanctions mainly by:",
+      "options": [
+        { "answer": "Avoiding international trade and focusing on local markets", "correct": false },
+        { "answer": "Violating oil embargo rules and exporting directly", "correct": false },
+        { "answer": "Relocating to Gulf countries and working through intermediaries", "correct": true }
+      ]
+    }
+  ]
+},
+{
+    "word": "دُوگانِه سوز",
+    "correct": "hybrid",
+    "distractors": ["electric", "diesel-powered"],
+    "farsiContext": "با توجه به افزایش قیمت بنزین و دغدغه‌های آلودگی هوا، بسیاری از شهروندان تصمیم گرفته‌اند خودروهای دوگانه‌سوز خریداری کنند",
+    "englishContext": "Due to the rise in gasoline prices and concerns about air pollution, many citizens have decided to purchase dual-fuel vehicles",
+    "audio": "11.wav",
+    "multipleChoice": [
+      {
+        "question": "Many citizens are buying dual-fuel vehicles mainly because:",
+        "options": [
+          { "answer": "They are cheaper to maintain than regular cars", "correct": false },
+          { "answer": "They reduce fuel costs and help the environment", "correct": true },
+          { "answer": "They are required by government policy", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "رِشوِه",
+    "correct": "bribe",
+    "distractors": ["reward", "bonus"],
+    "farsiContext": "بر اساس گزارش‌ها، برخی از مسئولان محلی با نادیده گرفتن قوانین، اجازه‌ی استخراج غیرمجاز معادن را در ازای دریافت رشوه داده‌اند",
+    "englishContext": "According to reports, some local officials, by ignoring the laws, have allowed illegal mining in exchange for bribes",
+    "audio": "12.wav",
+    "multipleChoice": [
+      {
+        "question": "Some officials allowed illegal mining in exchange for:",
+        "options": [
+          { "answer": "Financial bribes", "correct": true },
+          { "answer": "Government bonuses", "correct": false },
+          { "answer": "Tax exemptions", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "سازمانِ شَفّافیَّتِ بِینُ‌المِلَل",
+    "correct": "Transparency International Organization",
+    "distractors": ["World Trade Organization", "International Monetary Fund"],
+    "farsiContext": "طبق گزارش سازمان شفافیت بین‌الملل، در سال‌های اخیر رتبه‌ی ایران در شاخص ادراک فساد به شدت سقوط کرده است",
+    "englishContext": "According to Transparency International, in recent years Iran's ranking on the Corruption Perceptions Index has sharply declined",
+    "audio": "13.wav",
+    "multipleChoice": [
+      {
+        "question": "According to Transparency International, Iran's corruption ranking has:",
+        "options": [
+          { "answer": "Improved slightly over the past decade", "correct": false },
+          { "answer": "Sharply declined in recent years", "correct": true },
+          { "answer": "Remained unchanged despite reforms", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "سازو‌کار",
+    "correct": "mechanism",
+    "distractors": ["policy", "performance"],
+    "farsiContext": "دولت در تلاش است تا برای جلوگیری از هدر رفتن منابع مالی و حمایت از اقشار کم درآمد، ساز و کار جدیدی برای توزیع عادلانه یارانه‌ها طراحی کند",
+    "englishContext": "The government is striving to design a new mechanism for the fair distribution of subsidies to prevent the waste of financial resources and support low-income groups",
+    "audio": "14.wav",
+    "multipleChoice": [
+      {
+        "question": "The government is creating a new mechanism to:",
+        "options": [
+          { "answer": "Distribute subsidies more fairly and prevent financial waste", "correct": true },
+          { "answer": "Replace existing welfare policies", "correct": false },
+          { "answer": "Reduce government spending on infrastructure", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "سَهمیِه بَندی",
+    "correct": "rationing",
+    "distractors": ["subsidy", "restriction"],
+    "farsiContext": "سال گذشته طرح سهمیه‌بندی بنزین برای مدیریت مصرف سوخت و جلوگیری از هدر رفتن منابع انرژی به اجرا گذاشته شد",
+    "englishContext": "Last year, the fuel rationing plan was implemented to manage fuel consumption and prevent the waste of energy resources",
+    "audio": "15.wav",
+    "multipleChoice": [
+      {
+        "question": "The fuel rationing plan was introduced mainly to:",
+        "options": [
+          { "answer": "Increase fuel imports and storage", "correct": false },
+          { "answer": "Subsidize low-income fuel consumers", "correct": false },
+          { "answer": "Control fuel use and prevent energy waste", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "شِرکَتِ مِلّیِّ پَخشِ فَرآوَردِه‌هایِ نَفتیِ ایران",
+    "correct": "National Iranian Oil Products Distribution Company",
+    "distractors": ["National Iranian Oil Company", "Iranian Petroleum Export Organization"],
+    "farsiContext": "شرکت ملی پخش فرآورده‌های نفتی ایران مسئول توزیع بنزین سهمیه‌ای در جایگاه‌های سوخت است و با نظارت دقیق بر روند عرضه، تلاش می‌کند تا مصرف سوخت مدیریت شود",
+    "englishContext": "The National Iranian Oil Products Distribution Company is responsible for distributing rationed gasoline at fuel stations and, through careful monitoring of the supply process, strives to manage fuel consumption",
+    "audio": "16.wav",
+    "multipleChoice": [
+      {
+        "question": "The National Iranian Oil Products Distribution Company is mainly responsible for:",
+        "options": [
+          { "answer": "Exporting crude oil and setting international fuel prices", "correct": false },
+          { "answer": "Distributing rationed gasoline and managing fuel consumption", "correct": true },
+          { "answer": "Producing petroleum for domestic refineries", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "شَفّاف",
+    "correct": "transparent",
+    "distractors": ["obvious", "official"],
+    "farsiContext": "نبود اطلاعات شفاف درباره‌ی درآمدهای نفتی همواره یکی از چالش‌های اصلی اقتصاد ایران بوده است و باعث کاهش اعتماد عمومی نسبت به هزینه کردن منابع ملی در کشور شده است",
+    "englishContext": "The lack of transparent information regarding oil revenues has always been one of the main challenges of Iran's economy and has led to a decline in public trust in how national resources are spent",
+    "audio": "17.wav",
+    "multipleChoice": [
+      {
+        "question": "The lack of transparent information about oil revenues has:",
+        "options": [
+          { "answer": "Increased trust in the government's financial reports", "correct": false },
+          { "answer": "Led to public concern and reduced confidence in spending practices", "correct": true },
+          { "answer": "Helped reduce dependence on oil exports", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "صَرفِه جویی کردن",
+    "correct": "to save on",
+    "distractors": ["to invest in", "to spend on"],
+    "farsiContext": "دولت مردم را تشویق می‌کند تا در مصرف انرژی صرفه‌جویی کنند، زیرا این کار علاوه بر حفظ منابع طبیعی، به پایداری اقتصاد ملی و کاهش وابستگی به نفت کمک می‌کند",
+    "englishContext": "The government encourages people to save energy because this not only preserves natural resources but also contributes to national economic sustainability and reduces dependence on oil",
+    "audio": "18.wav",
+    "multipleChoice": [
+      {
+        "question": "The government encourages citizens to save energy mainly to:",
+        "options": [
+          { "answer": "Increase exports of domestic energy products", "correct": false },
+          { "answer": "Expand industrial energy use", "correct": false },
+          { "answer": "Preserve natural resources and strengthen economic stability", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "فاسِد",
+    "correct": "corrupted",
+    "distractors": ["misguided", "dishonest"],
+    "farsiContext": "برخی کارشناسان معتقدند که اگر سیستم نظارتی بر توزیع یارانه‌ها ضعیف باشد، منابع مالی ممکن است در دسترس افراد فاسد قرار بگیرد و باعث گسترش نابرابری‌های اجتماعی شود",
+    "englishContext": "Some experts believe that if the monitoring system for subsidy distribution is weak, financial resources may fall into the hands of corrupt individuals and lead to the expansion of social inequalities",
+    "audio": "19.wav",
+    "multipleChoice": [
+      {
+        "question": "Experts warn that weak oversight of subsidies could:",
+        "options": [
+          { "answer": "Allow corrupt individuals to misuse public funds", "correct": true },
+          { "answer": "Increase inefficiency in financial resource management", "correct": false },
+          { "answer": "Encourage fair distribution among citizens regardless of their social class", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "فِساد / مَفاسِد",
+    "correct": "corruption(s)",
+    "distractors": ["violations", "briberies"],
+    "farsiContext": "گستردگی فساد در سیستم توزیع یارانه‌ها بارها موجب اعتراضات اجتماعی شده است، زیرا مردم معتقدند که منابع عمومی به‌جای حمایت از اقشار ضعیف جامعه، در اختیار افراد فاسد قرار می‌گیرند",
+    "englishContext": "The widespread corruption in the subsidy distribution system has repeatedly led to social protests, as people believe that public resources, instead of supporting the vulnerable segments of society, are falling into the hands of corrupt individuals",
+    "audio": "20.wav",
+    "multipleChoice": [
+      {
+        "question": "Widespread corruption in the subsidy system has caused:",
+        "options": [
+          { "answer": "Public protests over misuse of public resources", "correct": true },
+          { "answer": "Improved equality among low-income groups", "correct": false },
+          { "answer": "Increased public trust in government programs", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "کِرایِه",
+    "correct": "fare",
+    "distractors": ["ticket", "wage"],
+    "farsiContext": "با افزایش قیمت سوخت، کرایه وسایل حمل‌ونقل عمومی نیز بالا رفت و این موضوع فشار بیشتری بر دوش خانواده‌های کم‌درآمد گذاشت",
+    "englishContext": "With the increase in fuel prices, public transportation fares also rose, placing additional pressure on low-income families",
+    "audio": "21.wav",
+    "multipleChoice": [
+      {
+        "question": "The rise in fuel prices caused public transportation fares to:",
+        "options": [
+          { "answer": "Remain stable due to government subsidies", "correct": false },
+          { "answer": "Increase, adding financial pressure on low-income families", "correct": true },
+          { "answer": "Discourage usage among low-income families", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "مَبنا",
+    "correct": "base",
+    "distractors": ["construction", "structural"],
+    "farsiContext": "اصلاحات اقتصادی باید بر مبنای عدالت اجتماعی و شفافیت طراحی شود تا هم مانع گسترش نابرابری شود و هم اعتماد عمومی حفظ شود",
+    "englishContext": "Economic reforms should be designed based on social justice and transparency to both prevent the expansion of inequality and maintain public trust",
+    "audio": "22.wav",
+    "multipleChoice": [
+      {
+        "question": "Economic reforms should be designed on what base?",
+        "options": [
+          { "answer": "Social justice and transparency", "correct": true },
+          { "answer": "Expanding equality and building public trust", "correct": false },
+          { "answer": "Political influence and personal gain", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "مَعیشَت",
+    "correct": "livelihood",
+    "distractors": ["income", "housing"],
+    "farsiContext": "یارانه‌های نقدی تنها بخش کوچکی از هزینه‌های معیشت خانوارهای کم‌درآمد را پوشش می‌دهد و بسیاری از نیازهای اساسی آنها همچنان بدون حمایت باقی می‌ماند",
+    "englishContext": "Cash subsidies cover only a small portion of the living expenses of low-income households, and many of their basic needs remain unsupported",
+    "audio": "23.wav",
+    "multipleChoice": [
+      {
+        "question": "Cash subsidies help households mainly with:",
+        "options": [
+          { "answer": "Investing in high-value assets", "correct": false },
+          { "answer": "Meeting all their financial needs", "correct": false },
+          { "answer": "Covering part of their livelihood expenses", "correct": true }
+          
+        ]
+      }
+    ]
+  },
+  {
+    "word": "نَظَرخواهی",
+    "correct": "survey",
+    "distractors": ["believe", "insight"],
+    "farsiContext": "طبق یک نظرسنجی اخیر، بسیاری از مردم خواستار حذف یارانه‌ی ثروتمندان هستند تا منابع دولتی به‌صورت عادلانه‌تر به اقشار کم‌درآمد اختصاص یابد",
+    "englishContext": "According to a recent survey, many people demand the removal of subsidies for the wealthy so that government resources can be allocated more fairly to low-income groups",
+    "audio": "24.wav",
+    "multipleChoice": [
+      {
+        "question": "The recent survey showed that people want:",
+        "options": [
+          { "answer": "To allocate resources fairly among the wealthy families", "correct": false },
+          { "answer": "To remove subsidies for the wealthy and allocate resources fairly", "correct": true },
+          { "answer": "To increase taxes on high-income families", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "واریز کَردَن",
+    "correct": "to deposit",
+    "distractors": ["to withdraw", "to transfer"],
+    "farsiContext": "یارانه‌ی نقدی هر ماه به حساب شهروندان واریز می‌شود تا خانوارهای کم‌درآمد بتوانند بخشی از هزینه‌های زندگی خود را پوشش دهند",
+    "englishContext": "Cash subsidies are deposited into citizens' accounts every month so that low-income households can cover part of their living expenses",
+    "audio": "25.wav",
+    "multipleChoice": [
+      {
+        "question": "Cash subsidies are deposited to:",
+        "options": [
+          { "answer": "Allow low-income households to cover part of their living expenses", "correct": true },
+          { "answer": "Encourage savings in foreign accounts", "correct": false },
+          { "answer": "Provide luxury allowances to high-income families", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "وِزارَتِ اُمورِ اِقتِصادی وَ دارایی",
+    "correct": "Ministry of Economic Affairs and Finance",
+    "distractors": ["Central Bank", "Ministry of Trade"],
+    "farsiContext": "وزارت امور اقتصادی و دارایی مسئول مدیریت منابع حاصل از فروش نفت است و تلاش می‌کند این درآمدها به‌طور مؤثر برای بودجه و توسعه کشور اختصاص یابد",
+    "englishContext": "The Ministry of Economic Affairs and Finance is responsible for managing the revenues from oil sales and strives to allocate these funds effectively for the country's budget and development",
+    "audio": "26.wav",
+    "multipleChoice": [
+      {
+        "question": "The Ministry of Economic Affairs and Finance is responsible for:",
+        "options": [
+          { "answer": "Managing national revenues and distributing funds for public services", "correct": false },
+          { "answer": "Overseeing oil income and directing funds toward economic growth", "correct": false },
+          { "answer": "Managing oil revenues and allocating funds for budget and development", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "هَدَفمَند",
+    "correct": "targeted",
+    "distractors": ["purposefully", "optional"],
+    "farsiContext": "طرح یارانه‌ی هدفمند با هدف حمایت از اقشار ضعیف جامعه تدوین شد تا امکان دسترسی عادلانه به منابع مالی و کاهش فشار اقتصادی بر خانواده‌های کم‌درآمد فراهم شود",
+    "englishContext": "The targeted subsidy plan was developed to support the vulnerable segments of society, ensuring fair access to financial resources and reducing economic pressure on low-income families",
+    "audio": "27.wav",
+    "multipleChoice": [
+      {
+        "question": "The targeted subsidy plan aims to:",
+        "options": [
+          { "answer": "Support vulnerable families and ensure fair access to resources", "correct": true },
+          { "answer": "Assist low-income citizens and promote balanced distribution of funds", "correct": false },
+          { "answer": "Provide financial support to all families and encourage economic growth", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "اَعَم اَز",
+    "correct": "including",
+    "distractors": ["excluding", "limited to"],
+    "farsiContext": "برنامه‌های اصلاحی شامل بخش‌های مختلف اقتصاد بود، اعم از انرژی، کشاورزی و صنعت، تا همزمان رشد اقتصادی را تسریع کرده و نابرابری‌های موجود در جامعه را کاهش دهد",
+    "englishContext": "The reform programs covered various sectors of the economy, including energy, agriculture, and industry, aiming to simultaneously accelerate economic growth and reduce existing inequalities in society",
+    "audio": "28.wav",
+    "multipleChoice": [
+      {
+        "question": "The reform programs covered various sectors:",
+        "options": [
+          { "answer": "Including energy, agriculture, and industry", "correct": true },
+          { "answer": "Including finance, transportation, and technology", "correct": false },
+          { "answer": "Focusing mainly on industrial and agricultural production", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "اِلتِهاب",
+    "correct": "volatility",
+    "distractors": ["stability", "growth"],
+    "farsiContext": "افزایش ناگهانی قیمت ارز باعث ایجاد التهاب در بازارهای داخلی، نگرانی سرمایه‌گذاران و افزایش بی‌ثباتی در فعالیت‌های اقتصادی شد",
+    "englishContext": "The sudden increase in the exchange rate caused turbulence in domestic markets, investor concerns, and greater instability in economic activities",
+    "audio": "29.wav",
+    "multipleChoice": [
+      {
+        "question": "A sudden increase in exchange rates caused:",
+        "options": [
+          { "answer": "Improved confidence and stability in domestic markets", "correct": false },
+          { "answer": "Gradual recovery and growth in economic activities", "correct": false },
+          { "answer": "Volatility and investor concerns in domestic markets", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "تَدوین کردن",
+    "correct": "to enact (law)",
+    "distractors": ["to repeal", "to enforce"],
+    "farsiContext": "کارشناسان اقتصادی در حال تدوین برنامه‌ای برای کاهش وابستگی به نفت هستند تا اقتصاد کشور پایدارتر شود و نوسانات درآمدهای نفتی کمتر بر بودجه تأثیر بگذارد",
+    "englishContext": "Economic experts are developing a plan to reduce dependence on oil so that the country's economy becomes more sustainable and fluctuations in oil revenues have less impact on the budget",
+    "audio": "30.wav",
+    "multipleChoice": [
+      {
+        "question": "Economic experts are developing a plan to:",
+        "options": [
+          { "answer": "Enact policies to reduce dependence on oil and stabilize the economy", "correct": true },
+          { "answer": "Implement measures to expand oil exports for budget stability", "correct": false },
+          { "answer": "Formulate policies to increase government dependence on energy revenues", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "تُوسِعِه‌یافتِه",
+    "correct": "developed",
+    "distractors": ["vastness", "emerging"],
+    "farsiContext": "ایران هنوز بخش قابل‌توجهی از درآمد خود را از فروش نفت به‌دست می‌آورد، در حالی‌که کشورهای توسعه‌یافته با کاهش وابستگی به نفت، مسیر پایدارتری برای رشد اقتصادی انتخاب کرده اند",
+    "englishContext": "Iran still derives a significant portion of its revenue from oil sales, while developed countries, by reducing their dependence on oil, have chosen a more sustainable path for economic growth",
+    "audio": "31.wav",
+    "multipleChoice": [
+      {
+        "question": "Developed countries have chosen a more sustainable path for economic growth by:",
+        "options": [
+          { "answer": "Diversifying their energy and income source", "correct": false },
+          { "answer": "Expanding oil production to strengthen exports", "correct": false },
+          { "answer": "Decreasing reliance on oil revenues", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "تُولیدِ ناخالِصِ داخِلی",
+    "correct": "gross domestic product (GDP)",
+    "distractors": ["national income", "net exports"],
+    "farsiContext": "نفت نقش مهمی در تولید ناخالص داخلی ایران ایفا می‌کند و بخش قابل‌توجهی از بودجه و درآمدهای ارزی کشور همچنان به صادرات آن وابسته است",
+    "englishContext": "Oil plays an important role in Iran's GDP, and a significant portion of the country's budget and foreign exchange revenues still depends on its exports",
+    "audio": "32.wav",
+    "multipleChoice": [
+      {
+        "question": "Oil contributes significantly to Iran's:",
+        "options": [
+          { "answer": "Gross domestic product (GDP) and foreign exchange revenues", "correct": true },
+          { "answer": "Government spending on social programs", "correct": false },
+          { "answer": "Investment in infrastructure and technology", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "جامِع",
+    "correct": "comprehensive",
+    "distractors": ["social", "society"],
+    "farsiContext": "برای اصلاح اقتصاد، یک برنامه‌ی جامع و بلندمدت لازم است تا بتوان با مدیریت منابع، کاهش وابستگی به نفت و حمایت از تولید داخلی، زمینه‌ی رشد پایدار را فراهم کرد",
+    "englishContext": "To reform the economy, a comprehensive and long-term plan is necessary to manage resources, reduce dependence on oil, and support domestic production, thereby creating the conditions for sustainable growth",
+    "audio": "33.wav",
+    "multipleChoice": [
+      {
+        "question": "A comprehensive economic plan aims to:",
+        "options": [
+          { "answer": "Strengthen budget management, diversify the economy, and promote industrial output", "correct": false },
+          { "answer": "Manage resources, reduce oil dependence, and support domestic production", "correct": true },
+          { "answer": "Improve financial stability, enhance investment, and encourage trade growth", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "حَیاتی",
+    "correct": "crucial",
+    "distractors": ["livelihood", "yard"],
+    "farsiContext": "کاهش وابستگی به نفت یکی از اقدامات حیاتی برای تضمین آینده‌ی پایدار و توسعه‌ی همه‌جانبه‌ی اقتصاد ایران محسوب می‌شود",
+    "englishContext": "Reducing dependence on oil is considered a vital measure to ensure a sustainable future and comprehensive development of Iran's economy",
+    "audio": "34.wav",
+    "multipleChoice": [
+      {
+        "question": "Reducing dependence on oil is:",
+        "options": [
+          { "answer": "An important step for long-term financial stability", "correct": false },
+          { "answer": "A strategic action to support industrial and domestic growth", "correct": false },
+          { "answer": "A crucial measure for sustainable economic development", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "دارایی",
+    "correct": "asset",
+    "distractors": ["holding", "property"],
+    "farsiContext": "بخش بزرگی از دارایی‌های ملی ایران به صورت ذخایر نفت و گاز است و این منابع نقش مهمی در بودجه، درآمدهای ارزی و برنامه‌های توسعه‌ای کشور ایفا می‌کنند",
+    "englishContext": "A large portion of Iran's national assets exists in the form of oil and gas reserves, and these resources play an important role in the country's budget, foreign exchange revenues, and development programs",
+    "audio": "35.wav",
+    "multipleChoice": [
+      {
+        "question": "Oil and gas reserves are considered:",
+        "options": [
+          { "answer": "National assets essential for budget and development programs", "correct": true },
+          { "answer": "Key resources contributing to economic stability and planning", "correct": false },
+          { "answer": "Strategic reserves supporting government investment decisions", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "دَر غِیرِ اینصورَت",
+    "correct": "otherwise",
+    "distractors": ["in any case", "facing towards"],
+    "farsiContext": "باید مصرف سوخت مدیریت شود، در غیر این صورت کشور با بحران انرژی روبه‌رو خواهد شد و این امر می‌تواند تأثیر منفی بر تولید، حمل‌ونقل و معیشت مردم داشته باشد",
+    "englishContext": "Fuel consumption must be managed; otherwise, the country will face an energy crisis, which could negatively impact production, transportation, and people's livelihoods.",
+    "audio": "36.wav",
+    "multipleChoice": [
+      {
+        "question": "Fuel consumption must be managed; otherwise:",
+        "options": [
+          { "answer": "Economic and transportation systems could experience strain and instability", "correct": false },
+          { "answer": "Industrial output and public services may encounter significant challenges", "correct": false },
+          { "answer": "The country will face an energy crisis with negative impacts on production and livelihood", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "سَرنِوِشت ساز",
+    "correct": "epoch-making",
+    "distractors": ["prediction", "headcount"],
+    "farsiContext": "اجرای طرح هدفمندی یارانه‌ها تصمیمی سرنوشت‌ساز در تاریخ اقتصادی ایران بود، زیرا این طرح نه‌تنها نحوه‌ی توزیع یارانه‌ها را تغییر داد، بلکه تأثیر زیادی بر مدیریت منابع ملی و کاهش فشار مالی بر دولت داشت",
+    "englishContext": "The implementation of the targeted subsidy plan was a decisive decision in Iran's economic history, as it not only changed the way subsidies were distributed but also had a significant impact on managing national resources and reducing financial pressure on the government",
+    "audio": "37.wav",
+    "multipleChoice": [
+      {
+        "question": "The targeted subsidy plan was considered:",
+        "options": [
+          { "answer": "A significant policy reform with moderate effects", "correct": false },
+          { "answer": "An epoch-making decision in Iran’s economic history", "correct": true },
+          { "answer": "An important initiative affecting government resource management", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "شانِه خالی کردن",
+    "correct": "to evade",
+    "distractors": ["shoulder dislocation", "to duck"],
+    "farsiContext": "برخی مسئولان از پاسخگویی درباره‌ی سوءاستفاده‌های درآمدهای نفتی شانه خالی می‌کنند و این موضوع باعث از بین رفتن اعتماد عمومی و نارضایتی مردم نسبت به مدیریت منابع ملی شده است",
+    "englishContext": "Some officials shirk accountability regarding the misuse of oil revenues, and this has led to a loss of public trust and dissatisfaction with the management of national resources",
+    "audio": "38.wav",
+    "multipleChoice": [
+      {
+        "question": "Some officials shirk accountability in order to:",
+        "options": [
+          { "answer": "Improve transparency in government spending", "correct": false },
+          { "answer": "Deflect criticism without improving public trust", "correct": false },
+          { "answer": "Evade responsibility for misuse of oil revenues", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "شَخصِ حَقیقی/ اَشخاصِ حَقیقی",
+    "correct": "natural person(s)",
+    "distractors": ["legal entity(ies)", "corporation(s)"],
+    "farsiContext": "هر شخص حقیقی در ایران یارانه‌ی نقدی دریافت می‌کرد، صرف‌نظر از درآمدش، و این موضوع باعث شد که برخی اقشار پردرآمد نیز از حمایت‌های مالی دولت بهره‌مند شوند",
+    "englishContext": "Every natural person in Iran received cash subsidies regardless of their income, which resulted in some high-income groups also benefiting from the government's financial support",
+    "audio": "39.wav",
+    "multipleChoice": [
+      {
+        "question": "A natural person in Iran is someone who:",
+        "options": [
+          { "answer": "Represents a company or other legal entity", "correct": false },
+          { "answer": "Receives cash subsidies individually regardless of income", "correct": true },
+          { "answer": "Participates in government financial management", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "شَخصِ حُقوقی/ اَشخاصِ حُقوقی",
+    "correct": "legal person(s)",
+    "distractors": ["natural person", "citizen"],
+    "farsiContext": "برخی اشخاص حقوقی مانند شرکت‌های بزرگ از یارانه‌ی انرژی استفاده می‌کردند و این موضوع باعث شد که بخشی از منابع دولتی به جای حمایت از اقشار کم‌درآمد، به مصرف‌کنندگان پرمصرف و ثروتمند اختصاص یابد",
+    "englishContext": "Some legal entities, such as large companies, used energy subsidies, which resulted in a portion of government resources being allocated to high-consumption and wealthy users instead of supporting low-income groups",
+    "audio": "40.wav",
+    "multipleChoice": [
+      {
+        "question": "Legal persons in Iran refer to entities that:",
+        "options": [
+          { "answer": "Used subsidies, diverting resources from low-income groups", "correct": true },
+          { "answer": "Operate as companies or organizations rather than individual citizens", "correct": false },
+          { "answer": "Engage in economic activities without being natural persons", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "صَرّافی",
+    "correct": "currency exchange store",
+    "distractors": ["bank", "trading office"],
+    "farsiContext": "افزایش نرخ ارز موجب رونق بازار صرافی‌ها در ایران شد و فعالیت‌های خرید و فروش ارز را به شدت افزایش داد، در حالی که بی‌ثباتی اقتصادی و نگرانی‌های عمومی را نیز تشدید کرد",
+    "englishContext": "The rise in the exchange rate boosted the currency exchange market in Iran and sharply increased buying and selling activities, while also exacerbating economic instability and public concerns",
+    "audio": "41.wav",
+    "multipleChoice": [
+      {
+        "question": "The rise in exchange rates led to:",
+        "options": [
+          { "answer": "A boom in the currency exchange market with increased trading", "correct": true },
+          { "answer": "Heightened market activity without stabilizing economic conditions", "correct": false },
+          { "answer": "Greater trading fluctuations causing public concern and instability", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "صِنف / اَصناف",
+    "correct": "guild(s)",
+    "distractors": ["union", "company"],
+    "farsiContext": "رانندگان تاکسی به‌عنوان یک صنف مشخص، بیشترین تأثیر را از سهمیه‌بندی سوخت پذیرفتند و محدودیت در دریافت سوخت سهمیه‌ای، بر درآمد روزانه و هزینه‌های عملیاتی آنها فشار زیادی وارد کرد",
+    "englishContext": "Taxi drivers, as a specific professional group, were most affected by fuel rationing, and the limitations on receiving subsidized fuel placed significant pressure on their daily income and operational costs",
+    "audio": "42.wav",
+    "multipleChoice": [
+      {
+        "question": "Taxi drivers, as a professional guild, experienced:",
+        "options": [
+          { "answer": "Significant pressure on income and operational costs due to fuel rationing", "correct": true },
+          { "answer": "Increased operational challenges without direct subsidy relief", "correct": false },
+          { "answer": "Limited access to fuel, affecting daily transportation services", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "فَرارِ مالیاتی",
+    "correct": "tax evasion",
+    "distractors": ["tax relief", "tax incentive"],
+    "farsiContext": "برخی شرکت‌ها برای جبران هزینه‌های خود به فرار مالیاتی روی آورده‌اند و این اقدام نه تنها موجب کاهش درآمدهای دولت می‌شود، بلکه نابرابری اقتصادی و بی‌اعتمادی عمومی نسبت به نظام مالیاتی را نیز تشدید می‌کند",
+    "englishContext": "Some companies, in an effort to offset their expenses, resort to tax evasion. This not only reduces government revenues, but also exacerbates economic inequality and public distrust in the tax system",
+    "audio": "43.wav",
+    "multipleChoice": [
+      {
+        "question": "Companies engaging in tax evasion cause:",
+        "options": [
+          { "answer": "Strained public finances and decreased trust in government policies", "correct": false },
+          { "answer": "Unequal distribution of financial resources and regulatory challenges", "correct": false },
+          { "answer": "Reduced government revenue and increased economic inequality", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "فَرعی",
+    "correct": "secondary",
+    "distractors": ["primary", "tertiary"],
+    "farsiContext": "در جریان اصلاحات اقتصادی، تمرکز اصلی بر یارانه انرژی بود و سایر بخش‌های اقتصاد مانند کشاورزی و صنعت در اولویت‌های فرعی قرار گرفتند و توجه کمتری به اصلاحات آنها شد",
+    "englishContext": "During the economic reforms, the main focus was on energy subsidies, while other sectors of the economy, such as agriculture and industry, were given secondary priority and received less attention for reform",
+    "audio": "44.wav",
+    "multipleChoice": [
+      {
+        "question": "Other sectors of the economy during reforms were:",
+        "options": [
+          { "answer": "Given secondary priority and less attention", "correct": true },
+          { "answer": "Monitored closely but not prioritized over energy", "correct": false },
+          { "answer": "Included in reforms but with limited resources and focus", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "کَسری",
+    "correct": "deficit",
+    "distractors": ["surplus", "majority"],
+    "farsiContext": "کسری بودجه در ایالات متحده باعث تعطیلی موقت دولت شد و بر بسیاری از خدمات عمومی و فعالیت‌های دولتی تأثیر منفی گذاشت",
+    "englishContext": "The budget deficit in the United States led to a temporary government shutdown and negatively affected many public services and government activities",
+    "audio": "45.wav",
+    "multipleChoice": [
+      {
+        "question": "A budget deficit in the United States caused:",
+        "options": [  
+          { "answer": "Strained government operations with delayed public services", "correct": false },
+          { "answer": "Temporary government shutdown and negative impact on public services", "correct": true },
+          { "answer": "Disruptions in federal programs and reduced administrative activities", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "مَشمولِ ... بودن",
+    "correct": "to be subject to",
+    "distractors": ["to exclude", "to opt out of"],
+    "farsiContext": "در ابتدای اجرای طرح یارانه ها، تمام شهروندان ایرانی مشمول دریافت یارانه‌ی نقدی بودند، اما پس از مدتی این سیاست تغییر کرد و یارانه‌ها تنها به خانواده‌های آسیب‌پذیر اختصاص یافت",
+    "englishContext": "At the beginning of the subsidy reform plan, all Iranian citizens were eligible to receive cash subsidies, but after some time, this policy changed and subsidies were allocated only to vulnerable families",
+    "audio": "46.wav",
+    "multipleChoice": [
+      {
+        "question": "At the start of the subsidy plan, all citizens were:",
+        "options": [
+          { "answer": "Eligible only under certain income conditions", "correct": false },
+          { "answer": "Considered for subsidies but limited to selected groups", "correct": false },
+          { "answer": "Subject to receiving cash subsidies", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "word": "نَوَسان / نَوَسانات",
+    "correct": "fluctuation(s)",
+    "distractors": ["instability(ies)", "inflation(s)"],
+    "farsiContext": "بازار ارز ایران در سال‌های اخیر دچار شدیدترین نوسانات بوده است و این بی‌ثباتی تأثیر قابل‌توجهی بر قیمت کالاها، سرمایه‌گذاری‌ها و تصمیم‌گیری‌های اقتصادی مردم و شرکت‌ها گذاشته است",
+    "englishContext": "In recent years, Iran's foreign exchange market has experienced severe fluctuations, and this instability has had a significant impact on the prices of goods, investments, and the economic decision-making of both individuals and companies",
+    "audio": "47.wav",
+    "multipleChoice": [
+      {
+        "question": "Severe fluctuations in Iran's exchange market have:",
+        "options": [
+          { "answer": "Significantly impacted prices, investments, and economic decisions", "correct": true },
+          { "answer": "Created uncertainty affecting both individuals and companies", "correct": false },
+          { "answer": "Led to rapid changes in investment strategies and consumer behavior", "correct": false }
+        ]
+      }
+    ]
+  }
+];
+
+let currentIndex = 0;
+let currentChances = 0;
+let answeredCorrectly = false;
+
+const vocabWordElem = document.getElementById("vocab-word");
+const answersElem = document.getElementById("answers");
+const farsiContextElem = document.getElementById("farsi-context");
+const englishContextElem = document.getElementById("english-context");
+const audioPlayer = document.getElementById("audio-player");
+const backBtn = document.getElementById("back-btn");
+const nextBtn = document.getElementById("next-btn");
+const progressText = document.getElementById("progress-text");
+const revealBtn = document.getElementById("reveal-btn");
+const revealIndicator = document.getElementById("reveal-indicator");
+const audioMCSection = document.getElementById("audio-mc-section");
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function loadWord(index) {
+  const vocab = vocabData[index];
+  currentChances = 0;
+  answeredCorrectly = false;
+
+  vocabWordElem.textContent = vocab.word;
+
+  let options = [
+    { text: vocab.correct, isCorrect: true },
+    { text: vocab.distractors[0], isCorrect: false },
+    { text: vocab.distractors[1], isCorrect: false },
+  ];
+  options = shuffleArray(options);
+
+  answersElem.innerHTML = "";
+  const colors = ["color-blue", "color-orange", "color-purple"];
+  options.forEach((option, idx) => {
+    const div = document.createElement("div");
+    div.className = `answer-box ${colors[idx]}`;
+    div.textContent = option.text;
+    div.dataset.isCorrect = option.isCorrect;
+
+    const feedbackSpan = document.createElement("span");
+    feedbackSpan.className = "feedback";
+    div.appendChild(feedbackSpan);
+
+    div.addEventListener("click", () => {
+      if (answeredCorrectly) return;
+      if (div.classList.contains("disabled")) return;
+
+      currentChances++;
+
+      if (option.isCorrect) {
+        feedbackSpan.textContent = "✅";
+        answeredCorrectly = true;
+        disableAllExcept(div);
+        if (vocab.multipleChoice) showAudioMC(vocab.multipleChoice[0]);
+      } else {
+        feedbackSpan.textContent = "❌";
+        if (currentChances >= 2) {
+          showCorrectAnswer();
+          disableAllExcept(null);
+          if (vocab.multipleChoice) showAudioMC(vocab.multipleChoice[0]);
+        } else {
+          div.classList.add("disabled");
+        }
+      }
+    });
+
+    answersElem.appendChild(div);
+  });
+
+  farsiContextElem.textContent = vocab.farsiContext;
+  farsiContextElem.classList.remove("context-clear");
+  englishContextElem.textContent = "";
+  revealBtn.disabled = true;
+  revealBtn.classList.remove("active");
+  revealIndicator.style.display = "none";
+
+  audioPlayer.src = vocab.audio;
+  audioPlayer.load();
+
+  progressText.textContent = `Vocabulary ${index + 1} of ${vocabData.length}`;
+  backBtn.disabled = index === 0;
+  nextBtn.disabled = index === vocabData.length - 1;
+
+  audioMCSection.style.display = "none";
+}
+
+function disableAllExcept(exceptDiv) {
+  const answerBoxes = answersElem.querySelectorAll(".answer-box");
+  answerBoxes.forEach(box => { if (box !== exceptDiv) box.classList.add("disabled"); });
+}
+
+function showCorrectAnswer() {
+  const answerBoxes = answersElem.querySelectorAll(".answer-box");
+  answerBoxes.forEach(box => { if (box.dataset.isCorrect === "true") box.querySelector(".feedback").textContent = "✅"; });
+}
+
+function showAudioMC(mcData) {
+  if (!mcData) return;
+  audioMCSection.style.display = "block";
+  audioMCSection.innerHTML = "";
+
+  const questionElem = document.createElement("p");
+  questionElem.textContent = mcData.question;
+  audioMCSection.appendChild(questionElem);
+
+  mcData.options.forEach((opt, idx) => {
+    const div = document.createElement("div");
+    const colors = ["color-blue", "color-orange", "color-purple"];
+    div.className = `answer-box ${colors[idx]}`;
+    div.dataset.correct = opt.correct;
+    div.textContent = opt.answer;
+
+    const feedbackSpan = document.createElement("span");
+    feedbackSpan.className = "feedback";
+    div.appendChild(feedbackSpan);
+
+    div.addEventListener("click", () => {
+      if (div.classList.contains("disabled")) return;
+
+      if (opt.correct) {
+        feedbackSpan.textContent = "✅";
+        revealBtn.disabled = false;
+        revealBtn.classList.add("active");
+        revealIndicator.style.display = "block";
+        disableAllAudioExcept(div);
+      } else {
+        feedbackSpan.textContent = "❌";
+        div.classList.add("disabled");
+        const remaining = audioMCSection.querySelectorAll(".answer-box:not(.disabled)");
+        if (remaining.length === 1) {
+          remaining[0].querySelector(".feedback").textContent = "✅";
+          revealBtn.disabled = false;
+          revealBtn.classList.add("active");
+          revealIndicator.style.display = "block";
+          disableAllAudioExcept(remaining[0]);
+        }
+      }
+    });
+
+    audioMCSection.appendChild(div);
+  });
+}
+
+function disableAllAudioExcept(exceptDiv) {
+  const answerBoxes = audioMCSection.querySelectorAll(".answer-box");
+  answerBoxes.forEach(box => { if (box !== exceptDiv) box.classList.add("disabled"); });
+}
+
+revealBtn.addEventListener("click", () => {
+  farsiContextElem.classList.add("context-clear");
+  englishContextElem.textContent = vocabData[currentIndex].englishContext;
+  revealBtn.disabled = true;
+  revealBtn.classList.remove("active");
+  revealIndicator.style.display = "none";
+});
+
+backBtn.addEventListener("click", () => {
+  if (currentIndex > 0) { currentIndex--; loadWord(currentIndex); }
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentIndex < vocabData.length - 1) { currentIndex++; loadWord(currentIndex); }
+});
+
+loadWord(currentIndex);
+</script>
+<!-- celebration + feedback system -->
+<style>
+  #gif-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+
+  .celebration-gif {
+    position: absolute;
+    object-fit: contain;
+    animation: floatUp 2200ms cubic-bezier(.2,.9,.2,1) forwards;
+    will-change: transform, opacity;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-160px) scale(1.45) rotate(20deg); }
+  }
+
+  #try-again {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  #try-again.show {
+    opacity: 1;
+  }
+</style>
+
+<div id="gif-container"></div>
+<div id="try-again"></div>
+
+<audio id="sound-correct" src="correct.mp3" preload="auto"></audio>
+<audio id="sound-wrong" src="wrong.mp3" preload="auto"></audio>
+
+<script>
+(function(){
+  const gifList = [
+    "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif",
+    "https://media.giphy.com/media/26gsiCIKW7ANEmxKE/giphy.gif",
+    "https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif",
+    "https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"
+  ];
+
+  const container = document.getElementById("gif-container");
+  const tryAgainEl = document.getElementById("try-again");
+  const soundCorrect = document.getElementById("sound-correct");
+  const soundWrong = document.getElementById("sound-wrong");
+
+  function spawnGifAt(x, y) {
+    const img = document.createElement("img");
+    img.src = gifList[Math.floor(Math.random() * gifList.length)];
+    img.className = "celebration-gif";
+
+    const size = 60 + Math.floor(Math.random() * 120); // 60–180 px
+    img.style.width = size + "px";
+    img.style.height = size + "px";
+
+    const offsetX = Math.floor(Math.random() * 120) - 60;
+    const offsetY = Math.floor(Math.random() * 60) - 30;
+    img.style.left = (x - size/2 + offsetX) + "px";
+    img.style.top = (y - size/2 + offsetY) + "px";
+
+    img.style.transform = `rotate(${Math.floor(Math.random() * 50) - 25}deg)`;
+
+    container.appendChild(img);
+
+    setTimeout(() => img.remove(), 2400);
+  }
+
+  function burstAt(x, y) {
+    const count = 3 + Math.floor(Math.random() * 3); // 3–5 gifs
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => spawnGifAt(
+        x + Math.floor(Math.random()*50-25),
+        y + Math.floor(Math.random()*30-15)
+      ), i * 100);
+    }
+  }
+
+  function showTryAgain() {
+    tryAgainEl.textContent = "❌ Try again";
+    tryAgainEl.classList.add("show");
+    setTimeout(() => tryAgainEl.classList.remove("show"), 1500);
+  }
+
+  document.addEventListener("click", function(e) {
+    const answerBox = e.target.closest(".answer-box");
+    if (!answerBox) return;
+
+    const isCorrect = answerBox.dataset.correct === "true" ||
+                      answerBox.dataset.isCorrect === "true" ||
+                      answerBox.getAttribute("data-is-correct") === "true";
+
+    if (isCorrect) {
+      soundCorrect.currentTime = 0;
+      soundCorrect.play();
+      burstAt(e.pageX || window.innerWidth/2, e.pageY || window.innerHeight/2);
+    } else {
+      soundWrong.currentTime = 0;
+      soundWrong.play();
+      showTryAgain();
+    }
+  });
+})();
+</script>
+<!-- end celebration + feedback system -->
+</body>
+</html>
